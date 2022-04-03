@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
-
+using TMPro;
+using UnityEngine.UI;
 public class TourARSession : MonoBehaviour
 {
     public ARSessionOrigin SessionOrigin;
@@ -18,10 +19,32 @@ public class TourARSession : MonoBehaviour
     public UnityEvent OnTrackingStarted = new UnityEvent();
     public UnityEvent OnTrackingStopped = new UnityEvent();
 
+    /// <summary>
+    /// debug tracked object
+    /// </summary>
+    public Button xrot;
+    public Button yrot;
+    public Button zrot;
+    public TMP_Text debugText;
+
     private void Start()
     {
         curOverlay = GameObject.Instantiate(p_WorldOverlay);
         curOverlay.SetActive(false);
+
+        xrot.onClick.AddListener(() =>
+        {
+            curOverlay.transform.rotation = Quaternion.Euler(curOverlay.transform.rotation.eulerAngles.x + 90, curOverlay.transform.rotation.eulerAngles.y, curOverlay.transform.rotation.eulerAngles.z);
+            DebugUpdate();
+        });
+        
+        yrot.onClick.AddListener(() => { curOverlay.transform.rotation = Quaternion.Euler(curOverlay.transform.rotation.eulerAngles.x, curOverlay.transform.rotation.eulerAngles.y + 90, curOverlay.transform.rotation.eulerAngles.z); DebugUpdate(); });
+        zrot.onClick.AddListener(() => { curOverlay.transform.rotation = Quaternion.Euler(curOverlay.transform.rotation.eulerAngles.x, curOverlay.transform.rotation.eulerAngles.y, curOverlay.transform.rotation.eulerAngles.z + 90); DebugUpdate(); });
+    }
+
+    private void DebugUpdate()
+    {
+        debugText.text = $"obj: x:{curOverlay.transform.rotation.eulerAngles.x} y:{curOverlay.transform.rotation.eulerAngles.y} z:{curOverlay.transform.rotation.eulerAngles.z}";
     }
 
     private void OnEnable()
