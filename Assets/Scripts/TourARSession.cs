@@ -10,6 +10,7 @@ public class TourARSession : MonoBehaviour
 {
     public ARSessionOrigin SessionOrigin;
     public ARTrackedImageManager TrackedImageManager;
+    public ARPlaneManager PlaneManager;
 
     public GameObject p_WorldOverlay;
 
@@ -18,6 +19,8 @@ public class TourARSession : MonoBehaviour
 
     public UnityEvent OnTrackingStarted = new UnityEvent();
     public UnityEvent OnTrackingStopped = new UnityEvent();
+
+    public float minPlaneDistanceFromTrackedMeters = .5f;
 
     /// <summary>
     /// debug tracked object
@@ -40,6 +43,7 @@ public class TourARSession : MonoBehaviour
         
         yrot.onClick.AddListener(() => { curOverlay.transform.rotation = Quaternion.Euler(curOverlay.transform.rotation.eulerAngles.x, curOverlay.transform.rotation.eulerAngles.y + 90, curOverlay.transform.rotation.eulerAngles.z); DebugUpdate(); });
         zrot.onClick.AddListener(() => { curOverlay.transform.rotation = Quaternion.Euler(curOverlay.transform.rotation.eulerAngles.x, curOverlay.transform.rotation.eulerAngles.y, curOverlay.transform.rotation.eulerAngles.z + 90); DebugUpdate(); });
+        PlaneManager.planesChanged += (ARPlanesChangedEventArgs arg) => { RemoveFarPlanes(); };
     }
 
     private void DebugUpdate()
@@ -90,7 +94,7 @@ public class TourARSession : MonoBehaviour
 
         foreach (ARTrackedImage updatedImage in eventArgs.updated)
         {
-
+            Debug.Log("finding planes to remove");
         }
 
         
@@ -116,5 +120,30 @@ public class TourARSession : MonoBehaviour
         GameObject.Destroy(curTracked.gameObject);
         curOverlay.SetActive(false);
         OnTrackingStopped.Invoke();
+    }
+
+    public void RemoveFarPlanes()
+    {
+        if (curTracked != null)
+        {
+            foreach (ARPlane plane in PlaneManager.trackables)
+            {
+                if (plane.trackingState == TrackingState.Limited || plane.trackingState == TrackingState.None)
+                {
+                    plane.gameObject.SetActive(false);
+                    return;
+                }
+
+                if (Vector3.Distance(plane.GetComponent<MeshCollider>().ClosestPoint(curTracked.transform.position), curTracked.transform.position) > minPlaneDistanceFromTrackedMeters)
+                {
+                    plane.gameObject.SetActive(false);
+                }
+                else
+                {
+                    Debug.Log("tryed to enable");
+                    //plane.gameObject.SetActive(true);
+                }
+            }
+        }
     }
 }
