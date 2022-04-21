@@ -1240,7 +1240,7 @@ MonoBehaviour:
       LocationInputType: 0
       LocationData: {fileID: 0}
       Location:
-        Latitude: 39.28732696016151
+        Latitude: 39.2873269601615
         Longitude: -89.87242081380064
         Altitude: 0
         AltitudeMode: 0
