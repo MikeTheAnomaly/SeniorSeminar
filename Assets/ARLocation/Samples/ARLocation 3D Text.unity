@@ -2071,8 +2071,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxNumberOfUpdates: 4
-  AverageCount: 160
-  UseRawUntilFirstAverage: 1
+  AverageCount: 400
+  UseRawUntilFirstAverage: 0
   MovementSmoothingFactor: 0.015
   TrueNorthOffset: 0
   ApplyCompassTiltCompensationOnAndroid: 1
