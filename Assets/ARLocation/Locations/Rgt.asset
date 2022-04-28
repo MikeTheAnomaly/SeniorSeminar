@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 635ca3a89b644ab44b888c22da8eae56, type: 3}
   m_Name: Rgt
   m_EditorClassIdentifier: 
-  location:
-    Latitude: -24.499391
-    Longitude: -47.868236
+  Location:
+    Latitude: 39.2873269601615
+    Longitude: -89.8724208138006
     Altitude: 0
     AltitudeMode: 2
     Label: 
