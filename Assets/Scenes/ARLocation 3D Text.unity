@@ -4237,6 +4237,8 @@ PlayableDirector:
     value: {fileID: 1688878393}
   - key: {fileID: 8914032096385804863, guid: b03fe9033b59fa84ab9803fb02ed6521, type: 2}
     value: {fileID: 1354247956}
+  - key: {fileID: 5965153256425061732, guid: b03fe9033b59fa84ab9803fb02ed6521, type: 2}
+    value: {fileID: 339581368}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1688878392
@@ -4839,7 +4841,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1954739355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4847,7 +4849,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954739354}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 160fbb5932ae8ce4ba471502929054dc, type: 3}
   m_Name: 
@@ -4981,7 +4983,7 @@ MonoBehaviour:
   UseRawUntilFirstAverage: 0
   MovementSmoothingFactor: 0.015
   TrueNorthOffset: 0
-  ApplyCompassTiltCompensationOnAndroid: 1
+  ApplyCompassTiltCompensationOnAndroid: 0
   LowPassFilterFactor: 0.07999999821186066
   OnOrientationUpdated:
     m_PersistentCalls:
